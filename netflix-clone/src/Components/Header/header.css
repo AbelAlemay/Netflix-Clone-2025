@@ -1,26 +1,54 @@
 .header_outer_container {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #141414;
-  /* background-color: transparent; */
+  /* background-color: #141414; */
+  background-color: transparent;
   height: clamp(56px, 8vh, 72px);
   color: #fff;
   transition:
     background-color 250ms ease,
     height 250ms ease;
-  z-index: 1;
+  z-index: 1000;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+/* Darken header background when scrolled */
+.header_outer_container.scrolled {
+  background-color: rgba(20, 20, 20, 0.85);
+}
+
+/* Subtle gradient fade at the very top of the header */
+.header_outer_container::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: clamp(24px, 6vh, 48px);
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.3) 40%,
+    rgba(0, 0, 0, 0) 100%
+  );
 }
 
 .header_container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 22px;
 }
 .header_left {
   display: flex;
@@ -36,7 +64,6 @@
   gap: clamp(0.8rem, 1.6vw, 1.3rem);
   cursor: pointer;
   align-items: center;
-  margin-left: auto;
 }
 
 .header_left img {
@@ -132,7 +159,7 @@
   }
 
   .hamburger {
-    display: inline-flex; /* show hamburger on phones */
+    display: inline-flex;
   }
 
   .header_right .MuiSvgIcon-root {
@@ -153,7 +180,7 @@
   }
 
   .header_left ul {
-    display: none; /* hide desktop nav on small tablets */
+    display: none;
   }
 
   .header_right ul {
@@ -161,7 +188,7 @@
   }
 
   .hamburger {
-    display: inline-flex; /* show hamburger on small tablets */
+    display: inline-flex;
   }
 }
 
@@ -180,19 +207,13 @@
 /* Large screens */
 @media (min-width: 1200px) {
   .header_container {
-    width: 85%;
-    max-width: 1400px;
+    width: 100%;
+    max-width: none;
+    padding: 0 28px; 
   }
 
   .header_left ul,
   .header_right ul {
     gap: clamp(1rem, 1.2vw, 1.5rem);
-  }
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .mobile_menu {
-    transition: none;
   }
 }

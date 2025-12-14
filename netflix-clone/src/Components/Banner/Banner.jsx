@@ -3,6 +3,8 @@ import requests from "../../utils/requests";
 import instance from "../../utils/axios";
 import "../Banner/banner.css";
 import truncate from "lodash/truncate";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import InfoOutlineIcon from "@mui/icons-material/InfoOutline";
 function Banner() {
   const [movie, setMovie] = useState({});
 
@@ -41,8 +43,12 @@ function Banner() {
           })}
         </p>
         <div className="banner_buttons">
-          <button className="banner_button_1">Play</button>
-          <button className="banner_button_2">My List</button>
+          <button className="banner_button_1">
+            <PlayArrowIcon className="banner_button_icon" /> Play
+          </button>
+          <button className="banner_button_2">
+            <InfoOutlineIcon className="banner_button_icon" /> More Info
+          </button>
         </div>
       </div>
       <div className="banner_fadeBottom"></div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./header.css";
 import netflix_logo from "../../assets/Netflix_Logo_RGB.png";
 import SearchIcon from "@mui/icons-material/Search";
@@ -10,11 +10,21 @@ import CloseIcon from "@mui/icons-material/Close";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <>
-      <div className="header_outer_container">
+      <div className={`header_outer_container ${isScrolled ? "scrolled" : ""}`}>
         <div className="header_container">
           <div className="header_left">
             <img src={netflix_logo} alt="netflix-logo" className="logo" />
@@ -69,13 +79,13 @@ function Header() {
             <CloseIcon />
           </button>
           <ul>
-            <li onClick={toggleMenu}>Home</li>
-            <li onClick={toggleMenu}>Shows</li>
-            <li onClick={toggleMenu}>Movies</li>
-            <li onClick={toggleMenu}>Games</li>
-            <li onClick={toggleMenu}>New & Popular</li>
-            <li onClick={toggleMenu}>My List</li>
-            <li onClick={toggleMenu}>Browse by Languages</li>
+            <li>Home</li>
+            <li>Shows</li>
+            <li>Movies</li>
+            <li>Games</li>
+            <li>New & Popular</li>
+            <li>My List</li>
+            <li>Browse by Languages</li>
           </ul>
         </div>
       </nav>
